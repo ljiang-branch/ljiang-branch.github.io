@@ -16,7 +16,7 @@
         // branch.init('key_live_jkXQEM4xnfXgEkyke50rIicftug2ITK5');
         branch.init('key_live_jkXQEM4xnfXgEkyke50rIicftug2ITK5', function (err, data) {
             console.log(`error? ${err} data:`, data);
-            document.getElementById('log1').innerHTML = 'has app: ' + data.has_app;
+            document.getElementById('before').innerHTML = 'has app: ' + data.has_app;
         });
 
         var linkData = {
@@ -38,14 +38,27 @@
 
         branch.link(linkData, function (err, link) {
             console.log(`error? ${err} link: ${link}`);
-            document.getElementById('log2').innerHTML = 'link: ' + link;
+            document.getElementById('button').onclick = function() {
+                window.open(link || err)
+            };
+            document.getElementById('anchor').innerHTML = link || err;
+            document.getElementById('anchor').href = link || err;
         });
+
+        branch.data(function(err, data) {
+            console.log(`error? ${err} data:`, data);
+            document.getElementById('after').innerHTML = 'has app: ' + data.has_app;
+        })
+
+
     </script>
 </head>
 
 <body>
-    <div id="log1"></div>
-    <div id="log2"></div>
+    <div id="before"></div>
+    <button id="button">Deep Link</button>
+    <a id="anchor" href="#">Deep Link should go here...</a>
+    <div id="after"></div>
 </body>
 
 </html>
