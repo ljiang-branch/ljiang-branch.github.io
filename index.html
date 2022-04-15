@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <script>
+        // if you would like to override console.log to print log to HTML only
+        // console.log = function (id, message) {
+        //     document.getElementById(id).innerHTML = message;
+        // };
+
         // load Branch
         (function (b, r, a, n, c, h, _, s, d, k) { if (!b[n] || !b[n]._q) { for (; s < _.length;)c(h, _[s++]); d = r.createElement(a); d.async = 1; d.src = "https://cdn.branch.io/branch-latest.min.js"; k = r.getElementsByTagName(a)[0]; k.parentNode.insertBefore(d, k); b[n] = h } })(window, document, "script", "branch", function (b, r) { b[r] = function () { b._q.push([r, arguments]) } }, { _q: [], _v: 1 }, "addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking".split(" "), 0);
         // init Branch
         // branch.init('key_live_jkXQEM4xnfXgEkyke50rIicftug2ITK5');
         branch.init('key_live_jkXQEM4xnfXgEkyke50rIicftug2ITK5', function (err, data) {
-            console.log("error? ", err, "\ndata: ", data);
+            console.log(`error? ${err} data:`, data);
+            document.getElementById('log1').innerHTML = 'has app: ' + data.has_app;
         });
 
         var linkData = {
@@ -31,12 +37,15 @@
         };
 
         branch.link(linkData, function (err, link) {
-            console.log("error? ", err, "\nlink:", link);
+            console.log(`error? ${err} link: ${link}`);
+            document.getElementById('log2').innerHTML = 'link: ' + link;
         });
     </script>
 </head>
 
 <body>
+    <div id="log1"></div>
+    <div id="log2"></div>
 </body>
 
 </html>
